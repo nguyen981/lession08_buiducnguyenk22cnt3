@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import BDNProductList from './components/BDNProductList';
+import BDNProductAdd from './components/BDNProductAdd';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  constructor(props){
+    super(props);
+    this.state ={
+      products :[
+        {title:'Bùi Đức Nguyên',id:2210900051,status:1},
+        {title:'garlic',id:2,status:0},
+        {title:'apple',id:3,status:0},
+        {title:'samsung',id:4,status:1},
+      ]
+    }
+  }
+  BDNHandldSumit=(param)=>{
+    console.log("App:",param);
+    let {products}=this.state;
+    products.push(param);
+    this.setState({
+      products:products
+    })
+  }
+  render() {
+    return (
+      <div className='container border mt-5'>
+        <h1>Bui Duc Nguyen -render data -event form</h1>
+        <hr/>
+        <BDNProductList renderProducts={this.state.products}/>
+        <hr/>
+        <BDNProductAdd onSummit={this.BDNHandldSumit}/>
+      </div>
+    )
+  }
 }
-
-export default App;
